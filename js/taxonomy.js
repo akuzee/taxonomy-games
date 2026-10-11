@@ -151,8 +151,11 @@
       }
     }
     if (kinds.includes('leaves')) {
+      // A leaf name shared by two leaves ("Manage employee performance" in APQC) has no single answer.
+      const twice = new Map();
+      for (const n of tax.nodes) if (!n.children.length) twice.set(n.title, (twice.get(n.title) || 0) + 1);
       for (const n of tax.nodes) {
-        if (n.children.length || skipped(n) || tax.isCatchAll(n)) continue;
+        if (n.children.length || skipped(n) || tax.isCatchAll(n) || twice.get(n.title) > 1) continue;
         const target = v.resolve(n.id);
         if (target) add(target, n.title, 'leaf');
       }

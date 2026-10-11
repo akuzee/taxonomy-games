@@ -57,10 +57,20 @@
     }
     return t;
   }
+  // Each guess word becomes its alternatives, each a list of tokens: "it" is
+  // [["it"], ["computer"]], so it can name "Information Technology (IT)" as
+  // itself or "Computer and Mathematical" through the synonym.
   function guessTokens(guess) {
     const out = [];
-    for (const w of words(guess)) for (const s of (SYN[w] || w).split(' ')) out.push(singular(s));
-    return [...new Set(out.filter((w) => !STOP.has(w) && w.length >= 2))];
+    const seen = new Set();
+    for (const w of words(guess)) {
+      const alts = [w, SYN[w]].filter(Boolean)
+        .map((f) => f.split(' ').map(singular).filter((t) => !STOP.has(t) && t.length >= 2))
+        .filter((a) => a.length);
+      const key = JSON.stringify(alts);
+      if (alts.length && !seen.has(key)) { seen.add(key); out.push(alts); }
+    }
+    return out;
   }
 
   function editDistance1(a, b) {
@@ -88,30 +98,44 @@
 
   // How a guess fits one title: null if any guess word fits nowhere; else
   // whether it covers every title word, and whether every guess word was exact.
-  function fit(gTokens, title) {
+  function fit(gWords, title) {
     const nTokens = titleTokens(title);
     const best = new Array(nTokens.length).fill(0);
     let exact = true;
-    for (const g of gTokens) {
-      let top = 0;
-      nTokens.forEach((n, i) => {
-        const s = wordFit(g, n);
-        if (s) { top = Math.max(top, s); best[i] = Math.max(best[i], s); }
-      });
-      if (!top) return null;
-      if (top < 1) exact = false;
+    for (const alts of gWords) {
+      // The word fits through whichever alternative fits best; every token of
+      // that alternative has to land somewhere in the title.
+      let pick = null;
+      for (const alt of alts) {
+        let worst = 1;
+        const hits = [];
+        for (const g of alt) {
+          let top = 0;
+          nTokens.forEach((n, i) => {
+            const s = wordFit(g, n);
+            if (s) { top = Math.max(top, s); hits.push([i, s]); }
+          });
+          worst = Math.min(worst, top);
+          if (!top) break;
+        }
+        if (worst && (!pick || worst > pick.worst)) pick = { worst, hits };
+      }
+      if (!pick) return null;
+      for (const [i, s] of pick.hits) best[i] = Math.max(best[i], s);
+      if (pick.worst < 1) exact = false;
     }
     return { full: best.every((s) => s > 0), exact };
   }
 
   // Anything starting with a digit is read as a code. Codes compare without
-  // punctuation, so "232011" finds 23-2011 and "1a1" finds 1.a.1. Two shortcuts:
-  // trailing zeros may be dropped ("23" → 23-0000), and a range code answers to
-  // either end ("31" → 31-33).
-  const normCode = (s) => String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
+  // dashes or spaces, so "232011" finds 23-2011. Two shortcuts: trailing zeros may
+  // be dropped ("23" → 23-0000, "1" → 1.0), and a range code answers to either
+  // end ("31" → 31-33).
+  // Dots stay: in dotted codes they carry the structure (1.1.11 ≠ 1.11.1).
+  const normCode = (s) => String(s).toLowerCase().replace(/[^a-z0-9.]/g, '');
   function codeForms(code) {
     const n = normCode(code);
-    const forms = [n, n.replace(/0+$/, '')];
+    const forms = [n, n.replace(/0+$/, ''), n.replace(/\.0+$/, '')];
     const range = /^(\d+)[-–](\d+)$/.exec(code);
     if (range && range[1].length === range[2].length && range[1].length <= 2) forms.push(range[1], range[2]);
     return forms;

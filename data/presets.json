@@ -363,5 +363,69 @@
     "title": "Ten trips",
     "blurb": "Race between programs across the map.",
     "count": 10
+  },
+  {
+    "id": "apqc-categories",
+    "taxonomy": "apqc-pcf",
+    "mode": "writein",
+    "title": "The 13 categories",
+    "blurb": "From Develop Vision and Strategy to Develop and Manage Business Capabilities.",
+    "levels": [
+      "category"
+    ]
+  },
+  {
+    "id": "apqc-groups",
+    "taxonomy": "apqc-pcf",
+    "mode": "writein",
+    "title": "Categories and process groups",
+    "blurb": "13 categories, then the 72 process groups under them.",
+    "levels": [
+      "category",
+      "group"
+    ]
+  },
+  {
+    "id": "apqc-finance",
+    "taxonomy": "apqc-pcf",
+    "mode": "writein",
+    "title": "Manage Financial Resources, all the way down",
+    "blurb": "Category 9.0: accounting, treasury, tax, payroll, and the rest.",
+    "scope": "9.0",
+    "levels": [
+      "group",
+      "process"
+    ]
+  },
+  {
+    "id": "apqc-file",
+    "taxonomy": "apqc-pcf",
+    "mode": "place",
+    "title": "Where does this process go?",
+    "blurb": "Detailed process names plus group names, filed down through every layer.",
+    "pool": [
+      "leaves",
+      "groups"
+    ],
+    "count": 15
+  },
+  {
+    "id": "apqc-metrics",
+    "taxonomy": "apqc-pcf",
+    "mode": "place",
+    "title": "What does this metric measure?",
+    "blurb": "APQC benchmark metrics. File each one on the process element it measures.",
+    "pool": [
+      "metrics"
+    ],
+    "count": 12
+  },
+  {
+    "id": "apqc-race",
+    "taxonomy": "apqc-pcf",
+    "mode": "race",
+    "title": "Ten trips",
+    "blurb": "Race between processes across the map.",
+    "count": 10
   }
 ]

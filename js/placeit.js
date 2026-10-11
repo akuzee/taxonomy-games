@@ -47,10 +47,14 @@
     cfg = config;
     v = view;
     const kinds = cfg.pool || v.tax.defaultPool || ['titles', 'groups'];
-    stopOffered = kinds.includes('groups');
     if (!list) {
       const pool = Tax.promptPool(v, { kinds, skip: cfg.skip ?? v.tax.skipTermsByDefault ?? [] });
       if (!pool.length) throw new Error('Nothing to file with these settings. Add a kind of term or widen the scope.');
+      // "Stop here" is offered whenever any answer in the pool is a group — group
+      // names, or terms filed on a group (APQC metrics). Decided from the pool, not
+      // the sample, so its absence never hints that every answer is a leaf.
+      // A retry (list given) keeps the original game's setting.
+      stopOffered = kinds.includes('groups') || pool.some((p) => !v.isLeaf(p.target));
       list = Tax.samplePrompts(pool, cfg.count ?? 15);
     }
     prompts = list;

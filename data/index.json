@@ -19,6 +19,12 @@
       "file": "data/taxonomies/napcs-2022.json"
     },
     {
+      "id": "apqc-pcf",
+      "name": "APQC PCF 7.4",
+      "label": "Business processes",
+      "file": "data/taxonomies/apqc-pcf.json"
+    },
+    {
       "id": "onet-wa",
       "name": "O*NET work activities",
       "label": "Work activities",

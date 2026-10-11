@@ -26,7 +26,7 @@ nothing to download.
 | `js/race.js` | Race: pairs, move/wrong-open/time tracking, golf-style score. `Race.current()` is a test hook |
 | `js/app.js` | Routing, home (ladder + presets), builder, shared end panel |
 | `data/taxonomies/*.json` | One normalized file per taxonomy (format in DECISIONS.md §2) |
-| `tools/build-{soc,naics,napcs,onet,cip}.mjs` | One build script per taxonomy. `tools/download.mjs` has the shared fetch/cache/write helpers, `tools/csv.mjs` and `tools/xlsx.mjs` the readers |
+| `tools/build-{soc,naics,napcs,apqc,onet,cip}.mjs` | One build script per taxonomy. `tools/download.mjs` has the shared fetch/cache/write helpers, `tools/csv.mjs` and `tools/xlsx.mjs` the readers |
 
 ## Conventions
 
@@ -72,8 +72,9 @@ node tools/build-artifact.mjs    # claude.ai Artifact: a page fragment + the dat
 
 ## Current state
 
-Five taxonomies (SOC with O*NET term sets, NAICS, NAPCS products, O*NET work activities,
-CIP programs) across Write-in, File it, Race, Explore, and the Map, plus the builder, 32
-presets, both themes, and a phone layout. Live on GitHub Pages; pushing to `main` deploys. Next
+Six taxonomies (SOC with O*NET term sets, NAICS, NAPCS products, APQC business
+processes, O*NET work activities, CIP programs) across Write-in, File it, Race, Explore,
+and the Map, plus the builder, 38 presets, both themes, and a phone layout. `build-apqc.mjs`
+needs the APQC workbook saved by hand (login-gated); never publish without its notice. Live on GitHub Pages; pushing to `main` deploys. Next
 steps are in [BACKLOG.md](BACKLOG.md), including the list of further classifications
 worth adding.

@@ -136,6 +136,7 @@ const EXPECT = {
   'onet-wa': [4, 9, 41, 332, 2087],
   'napcs-2022': [8, 158, 515, 1477, 3049],
   'cip-2020': [50, 464, 2173],
+  'apqc-pcf': [13, 72, 350, 1297, 189],
 };
 const catalog = JSON.parse(fs.readFileSync(path.join(root, 'data/index.json'), 'utf8'));
 const taxes = {};
@@ -145,13 +146,14 @@ for (const entry of catalog.taxonomies) {
   taxes[t.id] = t;
   const all = Tax.view(t, { levels: t.levelKeys });
   check(t.levels.map((_, i) => all.atLevel(i).length).join() === EXPECT[t.id].join(), `${t.id} level counts`);
-  check(t.terms.every((x) => t.byId.get(x.id)?.children.length === 0), `${t.id}: every term points at a leaf`);
+  check(t.terms.every((x) => t.setInfo(x.set).onGroups || t.byId.get(x.id)?.children.length === 0), `${t.id}: every term points at a leaf (unless its set files onto groups)`);
   for (const f of ['label', 'tagline', 'termNoun', 'termNounPlural', 'pools', 'defaultPool', 'boardLevels', 'findPlaceholder', 'example']) {
     check(t[f] != null, `${t.id}: has ${f}`);
   }
   check(t.boardLevels.every((k) => t.levelKeys.includes(k)), `${t.id}: board levels exist`);
   const ex = t.byId.get(t.example.node);
-  check(ex && t.terms.some((x) => x.text === t.example.term && x.id === ex.id), `${t.id}: example term resolves`);
+  check(ex && (ex.title === t.example.term || t.terms.some((x) => x.text === t.example.term && x.id === ex.id)),
+    `${t.id}: example term resolves`);
   const pool = Tax.promptPool(Tax.view(t), { kinds: t.defaultPool, skip: t.skipTermsByDefault || [] });
   for (const { kind } of t.pools) {
     const n = Tax.promptPool(Tax.view(t), { kinds: [kind] }).length;
@@ -186,6 +188,12 @@ console.log('matcher, other taxonomies');
     ['cip-2020', 'program', '48.0508', '48.0508'],
     ['cip-2020', 'program', 'welder', '48.0508'],
     ['cip-2020', 'program', 'welding', 'ambiguous'],
+    ['apqc-pcf', 'category', 'manage financial resources', '9.0'],
+    ['apqc-pcf', 'category', 'financial', '9.0'],
+    ['apqc-pcf', 'category', '9', '9.0'],
+    ['apqc-pcf', 'category', 'it', '8.0'],
+    ['apqc-pcf', 'group', '9.1', '9.1'],
+    ['apqc-pcf', 'process', '1.1.1', '1.1.1'],
   ];
   const views = new Map();
   for (const [id, level, guess, want] of cases) {

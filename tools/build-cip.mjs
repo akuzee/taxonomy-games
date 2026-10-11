@@ -73,6 +73,7 @@ const counts = writeTaxonomy({
     'top down, or take a program and file it.',
   termNoun: 'CIP example program name',
   termNounPlural: 'CIP example program names',
+  fileNoun: 'program name',
   termExamples: ['Arc Welding', 'Agroeconomics'],
   termSets: [{ key: 'examples', noun: 'CIP example program name', nounPlural: 'CIP example program names' }],
   pools: [

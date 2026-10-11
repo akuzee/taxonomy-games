@@ -8,9 +8,10 @@ Deferred ideas, each with why it was deferred and what would unblock it.
 
 Built: SOC 2018 (+ O*NET titles and tasks), NAICS 2022, O*NET work activities
 (2026-10-11), NAPCS Canada 2022 products, and CIP 2020 programs (2026-10-11).
-**Waiting on the user:** the APQC Process Classification Framework. They need to download
-the cross-industry Excel with an APQC account, and its bundled license decides whether it
-can go public (DECISIONS.md §14). The user wants
+APQC PCF 7.4 business processes added the same day, after the user downloaded it. Its
+license permits publishing with the notice (DECISIONS.md §15). APQC also publishes
+industry-specific PCFs (banking, utilities, aerospace…) that would fold in the same way.
+The user wants
 "taxonomies for understanding business activity on multiple levels": fold in alternates
 for the same things, and find the dimensions not covered yet. Candidates, with fit for this
 engine (a coded tree + outside terms that map to one leaf + a bulk download):

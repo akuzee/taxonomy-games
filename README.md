@@ -2,13 +2,14 @@
 
 Learning games for classification systems, in the spirit of [Map Games](../map%20games):
 instead of clicking a region on a map, you file things into the right drawer of a
-hierarchy. Five classifications so far, switchable by tab on the home page:
+hierarchy. Six classifications so far, switchable by tab on the home page:
 
 | Tab | Classification | Layers (default on) | Terms to file |
 |---|---|---|---|
 | Occupations | SOC 2018 (BLS) | 23 major → 98 minor → 459 broad → 867 detailed | 58,325: BLS job titles, O\*NET reported titles, O\*NET job titles, O\*NET task statements |
 | Industries | NAICS 2022 (Census) | 20 sectors → 96 subsectors → 308 industry groups → 689 industries → 1,012 national industries | 20,373 index entries ("Coffee shops, on premise brewing") |
 | Products | NAPCS Canada 2022 (Statistics Canada) | 158 groups → 515 classes → 1,477 subclasses → 3,049 detailed products | 45,664 example products ("Live dairy cows") |
+| Business processes | APQC PCF 7.4, cross-industry | 13 categories → 72 process groups → 350 processes → 1,297 activities → 189 tasks | process names, and 3,910 APQC benchmark metrics |
 | Work activities | O\*NET 31.0 | 41 GWAs → 332 IWAs → 2,087 DWAs | 13,414 task statements |
 | Education programs | CIP 2020 (NCES) | 50 series → 464 program groups → 2,173 programs | program names + 1,039 NCES examples ("Arc Welding") |
 
@@ -163,6 +164,7 @@ emits `data/taxonomies/<id>.json`:
 | `build-onet.mjs` | O\*NET 31.0 Content Model Reference + Tasks to DWAs, <https://www.onetcenter.org/database.html> | CC BY 4.0, attributed on the home page |
 | `build-napcs.mjs` | Statistics Canada NAPCS Canada 2022 v1.0 structure + elements CSVs | Statistics Canada Open Licence, attributed on the home page |
 | `build-cip.mjs` | NCES CIP 2020 CSV, <https://nces.ed.gov/ipeds/cipcode/> | public domain |
+| `build-apqc.mjs` | APQC PCF Cross-Industry Excel 7.4, <https://www.apqc.org/pcf> (needs a free APQC account; save as `tools/cache/apqc_pcf_cross_industry_7.4.xlsx`) | APQC's notice, below |
 
 `build-soc.mjs` also reads three O\*NET files (Sample of Reported Titles, Job Titles, Task
 Statements) for the SOC's extra term sets.
@@ -175,3 +177,12 @@ has one right answer. That's the "modified" in the attribution line.
 - **[DECISIONS.md](DECISIONS.md)**: why it's built this way, and the traps already paid for.
 - **[CLAUDE.md](CLAUDE.md)**: orientation for picking the codebase up cold.
 - **[BACKLOG.md](BACKLOG.md)**: deferred ideas (NAICS, O*NET work activities, …) with reasons.
+
+## APQC notice
+
+The business-process data (`data/taxonomies/apqc-pcf.json`) is derived from APQC's Process
+Classification Framework, and the license requires this notice in every copy and
+derivative work:
+
+> ©2024 APQC. ALL RIGHTS RESERVED. This Process Classification Framework® (“PCF”) is the copyrighted intellectual property of APQC. APQC encourages the wide distribution, discussion, and use of the PCF for classifying and defining organizational processes. Accordingly, APQC hereby grants you a perpetual, worldwide, royalty-free license to use, copy, publish, modify, and create derivative works of the PCF, provided that all copies of the PCF and any derivative works contain a copy of this notice.
+

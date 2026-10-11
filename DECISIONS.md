@@ -223,6 +223,30 @@ old presets keep working.
   co-developed with IBM under their own terms). Publishing on a public GitHub page needs
   that license read first.
 
+
+## 15. Business processes (APQC PCF)
+
+- **The license allows publishing, with conditions.** The cross-industry PCF 7.4 grants "a
+  perpetual, worldwide, royalty-free license to use, copy, publish, modify, and create
+  derivative works… provided that all copies… contain a copy of this notice." The notice
+  sits in a text box, not a cell, so `build-apqc.mjs` reads it out of the workbook's
+  drawing XML and refuses to build without it. It's stored verbatim in the data file
+  (`notice`), shown on the home page with the tab, and reproduced in the README.
+- **The source can't be downloaded by script** (APQC login). The user saved it to
+  `tools/cache/`. The build documents that, and the generated JSON is committed like the rest.
+- **Depth is uneven.** Branches end at process, activity, or task level. Nothing in the
+  engine assumed uniform depth except "stop here".
+- **"Stop here" is offered whenever any answer in the pool is a group**, not only when group
+  names are in it. APQC's 3,910 benchmark metrics measure elements at every level (1,003
+  sit on categories), so a metric's answer is often a group. The decision is made from the
+  whole pool, so the option's absence never gives away that an answer is a leaf.
+- **A term set can file onto groups** (`onGroups: true`); `tools/test.mjs` exempts only those
+  from the every-term-is-a-leaf check.
+- **Synonyms are alternatives, not replacements.** "it" meant "computer" for the SOC, which
+  hid APQC's "Manage Information Technology (IT)". Now each guess word can fit as itself or
+  through its synonym.
+- **Typed codes keep their dots** (1.1.11 ≠ 1.11.1), and "9" still finds category 9.0.
+
 ---
 
 ## Operational notes

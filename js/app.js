@@ -194,7 +194,9 @@
     const lower = Tax.lower;
     const leaf = tax.levels.filter((l) => l.default).at(-1);
     const [e1, e2] = tax.termExamples || [];
-    $('copy-place').textContent = `Get ${/^[aeiou]/i.test(tax.termNoun) ? 'an' : 'a'} ${tax.termNoun}` +
+    // fileNoun: what File it hands you by default, when that isn't the term set (APQC: process names).
+    const fileNoun = tax.fileNoun || tax.termNoun;
+    $('copy-place').textContent = `Get ${/^[aeiou]/i.test(fileNoun) ? 'an' : 'a'} ${fileNoun}` +
       (e1 ? `, such as “${e1}”${e2 ? ` or “${e2}”` : ''},` : '') +
       ` and pick its branch at every layer down to the ${lower(leaf.name)}. Group names show up too, ` +
       'and for those you also have to say which layer they sit at.';
