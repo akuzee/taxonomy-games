@@ -1,0 +1,34 @@
+{
+  "taxonomies": [
+    {
+      "id": "soc-2018",
+      "name": "SOC 2018",
+      "label": "Occupations",
+      "file": "data/taxonomies/soc-2018.json"
+    },
+    {
+      "id": "naics-2022",
+      "name": "NAICS 2022",
+      "label": "Industries",
+      "file": "data/taxonomies/naics-2022.json"
+    },
+    {
+      "id": "napcs-2022",
+      "name": "NAPCS Canada 2022",
+      "label": "Products",
+      "file": "data/taxonomies/napcs-2022.json"
+    },
+    {
+      "id": "onet-wa",
+      "name": "O*NET work activities",
+      "label": "Work activities",
+      "file": "data/taxonomies/onet-wa.json"
+    },
+    {
+      "id": "cip-2020",
+      "name": "CIP 2020",
+      "label": "Education programs",
+      "file": "data/taxonomies/cip-2020.json"
+    }
+  ]
+}

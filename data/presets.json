@@ -1,0 +1,367 @@
+[
+  {
+    "id": "soc-majors",
+    "taxonomy": "soc-2018",
+    "mode": "writein",
+    "title": "The 23 major groups",
+    "blurb": "All 23, from 11-0000 Management to 55-0000 Military Specific.",
+    "levels": [
+      "major"
+    ]
+  },
+  {
+    "id": "soc-top-down",
+    "taxonomy": "soc-2018",
+    "mode": "writein",
+    "title": "The whole SOC, top down",
+    "blurb": "From 23 major groups down to 867 occupations. Get as far as you can.",
+    "levels": [
+      "major",
+      "minor",
+      "broad",
+      "detailed"
+    ]
+  },
+  {
+    "id": "soc-legal",
+    "taxonomy": "soc-2018",
+    "mode": "writein",
+    "title": "Legal, all the way down",
+    "blurb": "23-0000: 2 minor groups, then every legal occupation.",
+    "scope": "23-0000",
+    "levels": [
+      "minor",
+      "broad",
+      "detailed"
+    ]
+  },
+  {
+    "id": "soc-computer",
+    "taxonomy": "soc-2018",
+    "mode": "writein",
+    "title": "Computer and mathematical",
+    "blurb": "15-0000: from Computer Occupations down to Data Scientists.",
+    "scope": "15-0000",
+    "levels": [
+      "minor",
+      "broad",
+      "detailed"
+    ]
+  },
+  {
+    "id": "soc-healthcare",
+    "taxonomy": "soc-2018",
+    "mode": "writein",
+    "title": "Healthcare practitioners",
+    "blurb": "29-0000: diagnosing and treating, technologists and technicians.",
+    "scope": "29-0000",
+    "levels": [
+      "minor",
+      "broad",
+      "detailed"
+    ]
+  },
+  {
+    "id": "file-titles",
+    "taxonomy": "soc-2018",
+    "mode": "place",
+    "title": "Where does this job go?",
+    "blurb": "Everyday job titles plus group names, filed down to the detailed occupation.",
+    "pool": [
+      "reported*",
+      "groups"
+    ],
+    "count": 15
+  },
+  {
+    "id": "file-quick",
+    "taxonomy": "soc-2018",
+    "mode": "place",
+    "title": "Job title to major group",
+    "blurb": "One pick out of 23. Quick.",
+    "levels": [
+      "major"
+    ],
+    "pool": [
+      "illustrative"
+    ],
+    "count": 20
+  },
+  {
+    "id": "file-layers",
+    "taxonomy": "soc-2018",
+    "mode": "place",
+    "title": "Name the layer",
+    "blurb": "Only group names. Find each one and stop at the layer where it sits.",
+    "pool": [
+      "groups"
+    ],
+    "count": 15
+  },
+  {
+    "id": "file-legal",
+    "taxonomy": "soc-2018",
+    "mode": "place",
+    "title": "Legal job titles",
+    "blurb": "Every BLS title in 23-0000, from Paralegal to Hearing Officer.",
+    "scope": "23-0000",
+    "pool": [
+      "titles",
+      "groups"
+    ],
+    "count": 12
+  },
+  {
+    "id": "file-tasks",
+    "taxonomy": "soc-2018",
+    "mode": "place",
+    "title": "Whose task is this?",
+    "blurb": "O*NET task statements. File each one to the occupation that does it.",
+    "pool": [
+      "tasks"
+    ],
+    "count": 15
+  },
+  {
+    "id": "file-everything",
+    "taxonomy": "soc-2018",
+    "mode": "place",
+    "title": "All 6,520 BLS job titles",
+    "blurb": "Every direct-match title, military included. Hard.",
+    "pool": [
+      "titles"
+    ],
+    "skip": [],
+    "count": 25
+  },
+  {
+    "id": "race-ten",
+    "taxonomy": "soc-2018",
+    "mode": "race",
+    "title": "Ten trips",
+    "blurb": "Ten races between random broad occupations, across the whole map.",
+    "count": 10
+  },
+  {
+    "id": "race-five",
+    "taxonomy": "soc-2018",
+    "mode": "race",
+    "title": "Quick five",
+    "blurb": "Five races, for a warm-up.",
+    "count": 5
+  },
+  {
+    "id": "naics-sectors",
+    "taxonomy": "naics-2022",
+    "mode": "writein",
+    "title": "The 20 sectors",
+    "blurb": "From 11 Agriculture to 92 Public Administration.",
+    "levels": [
+      "sector"
+    ]
+  },
+  {
+    "id": "naics-top-down",
+    "taxonomy": "naics-2022",
+    "mode": "writein",
+    "title": "Sectors and subsectors",
+    "blurb": "20 sectors, then the 96 subsectors under them.",
+    "levels": [
+      "sector",
+      "subsector"
+    ]
+  },
+  {
+    "id": "naics-food",
+    "taxonomy": "naics-2022",
+    "mode": "writein",
+    "title": "Accommodation and food, all the way down",
+    "blurb": "72: hotels, RV parks, restaurants, bars, caterers.",
+    "scope": "72",
+    "levels": [
+      "subsector",
+      "group",
+      "industry",
+      "national"
+    ]
+  },
+  {
+    "id": "naics-file",
+    "taxonomy": "naics-2022",
+    "mode": "place",
+    "title": "Where does this business go?",
+    "blurb": "Census index entries plus group names, filed down to the 6-digit industry.",
+    "pool": [
+      "titles",
+      "groups"
+    ],
+    "count": 15
+  },
+  {
+    "id": "naics-file-quick",
+    "taxonomy": "naics-2022",
+    "mode": "place",
+    "title": "Business to sector",
+    "blurb": "One pick out of 20. Quick.",
+    "levels": [
+      "sector"
+    ],
+    "pool": [
+      "titles"
+    ],
+    "count": 20
+  },
+  {
+    "id": "naics-race",
+    "taxonomy": "naics-2022",
+    "mode": "race",
+    "title": "Ten trips",
+    "blurb": "Race between industry groups across the NAICS map.",
+    "count": 10
+  },
+  {
+    "id": "onet-gwas",
+    "taxonomy": "onet-wa",
+    "mode": "writein",
+    "title": "The 41 GWAs",
+    "blurb": "Every generalized work activity, from Getting Information to Monitoring and Controlling Resources.",
+    "levels": [
+      "gwa"
+    ]
+  },
+  {
+    "id": "onet-gwa-iwa",
+    "taxonomy": "onet-wa",
+    "mode": "writein",
+    "title": "GWAs, then IWAs",
+    "blurb": "41 generalized activities, then as many of the 332 intermediate ones as you can.",
+    "levels": [
+      "gwa",
+      "iwa"
+    ]
+  },
+  {
+    "id": "onet-file",
+    "taxonomy": "onet-wa",
+    "mode": "place",
+    "title": "File the task",
+    "blurb": "Real task statements from O*NET occupations, filed down to the detailed activity.",
+    "pool": [
+      "titles",
+      "groups"
+    ],
+    "count": 15
+  },
+  {
+    "id": "onet-file-quick",
+    "taxonomy": "onet-wa",
+    "mode": "place",
+    "title": "Task to GWA",
+    "blurb": "One pick out of 41.",
+    "levels": [
+      "gwa"
+    ],
+    "pool": [
+      "titles"
+    ],
+    "count": 20
+  },
+  {
+    "id": "onet-race",
+    "taxonomy": "onet-wa",
+    "mode": "race",
+    "title": "Ten trips",
+    "blurb": "Race between intermediate work activities across the map.",
+    "count": 10
+  },
+  {
+    "id": "napcs-file",
+    "taxonomy": "napcs-2022",
+    "mode": "place",
+    "title": "Where does this product go?",
+    "blurb": "Illustrative example products plus group names, filed down to the detailed product.",
+    "pool": [
+      "examples*",
+      "groups"
+    ],
+    "count": 15
+  },
+  {
+    "id": "napcs-file-quick",
+    "taxonomy": "napcs-2022",
+    "mode": "place",
+    "title": "Product to class",
+    "blurb": "Two layers only: group, then class.",
+    "levels": [
+      "group",
+      "class"
+    ],
+    "pool": [
+      "examples*"
+    ],
+    "count": 20
+  },
+  {
+    "id": "napcs-services",
+    "taxonomy": "napcs-2022",
+    "mode": "writein",
+    "title": "Health, education, and public services",
+    "blurb": "The 8xx groups and their classes.",
+    "scope": "F8",
+    "levels": [
+      "group",
+      "class"
+    ]
+  },
+  {
+    "id": "napcs-race",
+    "taxonomy": "napcs-2022",
+    "mode": "race",
+    "title": "Ten trips",
+    "blurb": "Race between product classes across the map.",
+    "count": 10
+  },
+  {
+    "id": "cip-series",
+    "taxonomy": "cip-2020",
+    "mode": "writein",
+    "title": "The 50 series",
+    "blurb": "From 01 Agriculture to 61 Medical Residency.",
+    "levels": [
+      "series"
+    ]
+  },
+  {
+    "id": "cip-health",
+    "taxonomy": "cip-2020",
+    "mode": "writein",
+    "title": "Health professions, all the way down",
+    "blurb": "Series 51: nursing, pharmacy, dentistry, and the rest.",
+    "scope": "51",
+    "levels": [
+      "group",
+      "program"
+    ]
+  },
+  {
+    "id": "cip-file",
+    "taxonomy": "cip-2020",
+    "mode": "place",
+    "title": "Where does this program go?",
+    "blurb": "Program names and NCES examples, filed down to the six-digit program.",
+    "pool": [
+      "leaves",
+      "examples",
+      "groups"
+    ],
+    "count": 15
+  },
+  {
+    "id": "cip-race",
+    "taxonomy": "cip-2020",
+    "mode": "race",
+    "title": "Ten trips",
+    "blurb": "Race between programs across the map.",
+    "count": 10
+  }
+]

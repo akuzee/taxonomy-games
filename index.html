@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Taxonomy Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="masthead">
+      <button id="btn-home" class="linklike"><h1>Taxonomy Games</h1></button>
+      <p class="app-tagline">Learn a classification by filing things into it</p>
+    </div>
+    <div class="play-hud">
+      <span class="hud-quiz">
+        <span id="quiz-title"></span>
+        <span id="quiz-subtitle"></span>
+      </span>
+
+      <div class="prompt prompt--writein" id="prompt-writein">
+        <label class="lead" for="wi-input" id="wi-ask"></label>
+        <div class="wi-entry">
+          <input id="wi-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"
+                 placeholder="Type a name or code, then Enter">
+          <span id="wi-feedback" class="feedback" aria-live="polite"></span>
+        </div>
+      </div>
+
+      <div class="prompt prompt--place" id="prompt-place">
+        <span class="lead">File</span>
+        <strong id="pi-term"></strong>
+        <span class="tries" id="tries-left"></span>
+      </div>
+
+      <div class="prompt prompt--race" id="prompt-race">
+        <span class="lead">Go to</span>
+        <strong id="race-target"></strong>
+        <span class="race-from" id="race-from"></span>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><span class="label" id="stat-progress-label">Progress</span><span class="value" id="stat-progress">–</span></div>
+        <div class="stat"><span class="label" id="stat-score-label">Score</span><span class="value" id="stat-score">100%</span></div>
+        <div class="stat"><span class="label">Time</span><span class="value" id="stat-timer">00:00</span></div>
+      </div>
+      <button id="btn-wi-advance" class="ghost-btn">Reveal the rest</button>
+      <button id="btn-exit-play" class="ghost-btn">Exit</button>
+    </div>
+  </header>
+
+  <div id="error-bar" hidden></div>
+
+  <main>
+  <section id="view-home" hidden>
+    <nav class="tax-tabs" id="tax-tabs" aria-label="Classification"></nav>
+    <div class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow" id="hero-eyebrow">Standard Occupational Classification, 2018</p>
+        <h2 id="hero-title"></h2>
+        <p id="hero-blurb"></p>
+        <div class="hero-actions">
+          <button id="btn-map" class="primary-btn">Open the map</button>
+          <button id="btn-explore" class="ghost-btn">Explore the tree</button>
+        </div>
+      </div>
+      <figure class="ladder" id="ladder" aria-label="The layers of the classification"></figure>
+    </div>
+
+    <div class="modes">
+      <article class="mode-card">
+        <div class="mode-art" aria-hidden="true">
+          <div class="art-blank"><i id="art-code-0"></i><b id="art-title-0"></b></div>
+          <div class="art-blank art-blank--empty"><i id="art-code-1"></i><b></b></div>
+          <div class="art-blank art-blank--empty"><i id="art-code-2"></i><b></b></div>
+        </div>
+        <h3>Write-in</h3>
+        <p>Name the top layer, then each layer under it. Every blank shows its code and
+           how many siblings it has. Typos, short forms, and codes all count.</p>
+        <div class="preset-list" data-mode="writein"></div>
+      </article>
+      <article class="mode-card">
+        <div class="mode-art mode-art--cols" aria-hidden="true">
+          <div class="art-col"><span></span><span class="on"></span><span></span><span></span></div>
+          <div class="art-col"><span></span><span></span><span class="on"></span></div>
+          <div class="art-col"><span class="on"></span><span></span></div>
+          <div class="art-col"><span class="x"></span><span class="on"></span><span></span></div>
+        </div>
+        <h3>File it</h3>
+        <p id="copy-place"></p>
+        <div class="preset-list" data-mode="place"></div>
+      </article>
+      <article class="mode-card">
+        <div class="mode-art mode-art--map" aria-hidden="true">
+          <div class="art-tile" style="--h: 25"><span></span><span class="on"></span><span></span></div>
+          <div class="art-tile" style="--h: 162"><span></span><span></span></div>
+          <div class="art-tile" style="--h: 300"><span></span><span></span><span class="on goal"></span></div>
+          <div class="art-tile" style="--h: 77"><span></span><span></span></div>
+        </div>
+        <h3>Race</h3>
+        <p id="copy-race"></p>
+        <div class="preset-list" data-mode="race"></div>
+      </article>
+    </div>
+
+    <div class="home-foot">
+      <button id="btn-new-quiz" class="primary-btn">Build your own</button>
+      <p class="source" id="source-line"></p>
+    </div>
+  </section>
+
+  <section id="view-builder" hidden>
+    <form class="builder" id="builder" novalidate>
+      <h2>Build a game</h2>
+
+      <fieldset>
+        <legend>Mode</legend>
+        <div class="segmented" role="radiogroup">
+          <label><input type="radio" name="mode" value="writein" checked> Write-in</label>
+          <label><input type="radio" name="mode" value="place"> File it</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Classification</legend>
+        <label class="field">Taxonomy
+          <select id="b-taxonomy"></select>
+        </label>
+        <label class="field">Start from
+          <select id="b-scope"></select>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Layers to play</legend>
+        <p class="hint-text">Skipped layers drop out, and their children move up to the layer above.</p>
+        <div id="b-levels" class="checks"></div>
+      </fieldset>
+
+      <fieldset data-for="place">
+        <legend>What to file</legend>
+        <div class="checks" id="b-pool"></div>
+        <label class="check-inline" id="b-skip-wrap"><input type="checkbox" id="b-skip" checked> <span id="b-skip-label"></span></label>
+        <label class="field field--short">How many
+          <select id="b-count">
+            <option value="10">10</option>
+            <option value="15" selected>15</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="0">All of them</option>
+          </select>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Display</legend>
+        <label class="check-inline"><input type="checkbox" id="b-codes" checked> <span>Show codes</span></label>
+      </fieldset>
+
+      <p class="builder-summary" id="b-summary"></p>
+      <div class="builder-actions">
+        <button type="button" class="ghost-btn" id="b-cancel">Back</button>
+        <button type="submit" class="primary-btn">Start</button>
+      </div>
+    </form>
+  </section>
+
+  <section id="view-writein" hidden>
+    <div class="wi-board" id="wi-board"></div>
+  </section>
+
+  <section id="view-map" hidden>
+    <div class="map-bar">
+      <input id="map-find" type="search" autocomplete="off" spellcheck="false"
+             placeholder="Find a job: barista, paralegal, welder…" aria-label="Find a job on the map">
+      <span id="map-found" aria-live="polite"></span>
+      <span class="map-keys">Click or use ↑↓ ←→ · Enter opens · Esc closes</span>
+    </div>
+    <div id="map-board"></div>
+  </section>
+
+  <section id="view-race" hidden>
+    <p class="map-keys race-keys">Arrow keys move around the map · Enter opens a group, then picks · Esc closes.
+      Score = time + 1 s per move over par + 5 s per wrong group opened.</p>
+    <div id="race-board"></div>
+    <div class="race-card" id="race-card" hidden></div>
+  </section>
+
+  <section id="view-explore" hidden>
+    <div class="ex-bar">
+      <span>Click any group to open it.</span>
+      <label class="check-inline"><input type="checkbox" id="ex-all-levels"> <span id="ex-all-label">Show every layer</span></label>
+    </div>
+    <div class="pi-board" id="ex-board"></div>
+  </section>
+
+  <section id="view-place" hidden>
+    <div class="pi-board" id="pi-board"></div>
+  </section>
+  </main>
+
+  <div id="end-panel" hidden>
+    <div class="end-card" role="dialog" aria-labelledby="end-title">
+      <h2 id="end-title">Done</h2>
+      <div class="big-score" id="end-score">–</div>
+      <p class="end-meta"><span id="end-breakdown"></span><br>Time: <span id="end-time"></span></p>
+      <div id="end-table"></div>
+      <div id="missed-wrap" hidden>
+        <h3>To review</h3>
+        <ul id="missed-list"></ul>
+      </div>
+      <div class="end-actions">
+        <button class="primary-btn" id="btn-restart">Play again</button>
+        <button class="ghost-btn" id="btn-retry-missed" hidden></button>
+        <button class="ghost-btn" id="btn-end-home">Library</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/taxonomy.js"></script>
+  <script src="js/match.js"></script>
+  <script src="js/writein.js"></script>
+  <script src="js/placeit.js"></script>
+  <script src="js/explore.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/race.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
