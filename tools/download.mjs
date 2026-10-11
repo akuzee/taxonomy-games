@@ -48,4 +48,6 @@ export function writeTaxonomy(tax, prepare) {
   return counts;
 }
 
-export const clean = (s) => String(s ?? '').replace(/\s+/g, ' ').trim();
+// U+FFFD is a character the source already lost (APQC 7.4 has one where a space
+// belongs: "production\uFFFDalternatives"); it's never intended text.
+export const clean = (s) => String(s ?? '').replace(/\uFFFD/g, ' ').replace(/\s+/g, ' ').trim();
